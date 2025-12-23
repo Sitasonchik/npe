@@ -105,7 +105,7 @@ void file_write(char * file_name, data d){
 
 int main(){
     std::string choos = "1";
-    char key[] = "12323132132";
+    char key[1024];
     char data_in[] = "test.txt";
     
     std::cout << "encrypt(en) or decrypt(de): ";
