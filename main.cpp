@@ -17,10 +17,7 @@ struct data{
         size = s;
         text = t;
     }
-
-
 };
-
 
 unsigned char * sha256( char msg_in[]){
     EVP_MD_CTX * ctx;
@@ -42,8 +39,6 @@ unsigned char * sha256( char msg_in[]){
     EVP_MD_CTX_free(ctx);
     return msg_out;    
 }
-
-
 
 data AES128_ENC(char msg_in[], char key[], size_t len){
     auto msg_out = new unsigned char[1062144];
@@ -100,34 +95,30 @@ void file_write(char * file_name, data d){
 
     data_file.write(reinterpret_cast<char *>(d.text),d.size);    
     data_file.close();
-    
 }
 
 int main(){
-    std::string choos = "1";
+    std::string choose;
     char key[1024];
     char data_in[] = "test.txt";
     
     std::cout << "encrypt(en) or decrypt(de): ";
-    std::cin >> choos;
-    std::cout << "file to " << choos << "crypt: ";
+    std::cin >> choose;
+    std::cout << "file to " << choose << "crypt: ";
     std::cin >> data_in;
-    std::cout << "key to " << choos <<"crypt: ";
+    std::cout << "key to " << choose <<"crypt: ";
     std::cin >> key;
     
-
-
-    if(choos == "de"){       
+    if(choose == "de"){       
         auto tmp_d = file_read(data_in);
         auto tmp_dec = AES128_DEC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
         file_write(data_in, tmp_dec);
-    }
-
-    else if(choos == "en"){
+    } else if(choose == "en"){
         auto tmp_d = file_read(data_in);
         auto tmp_enc = AES128_ENC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
         file_write(data_in, tmp_enc);
     }
     std::cout << "done\n";
+
     return 0;
 }
