@@ -9,6 +9,9 @@ Cryprography based on openssl. AES was used for encryption.
 This prog required openssl, cmake.
 Command to install on arch: ```sudo pacman -S cmake openssl```
 
+## How to compile
+Launch build.sh file and done.
+
 ## How to use 
 1) launch app
 2) choose what will be done with file(decrypt or encrypt)
