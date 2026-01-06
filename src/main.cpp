@@ -50,7 +50,7 @@ int main(){
 
 
     ImGui::Text("file name:");
-    ImGui::InputText("file name", file_name, 1024);
+    ImGui::InputText("file name", file_name, 256);
     ImGui::Text("key:");
     ImGui::InputText("key", key, 1024);
     if (ImGui::Button("choose mode")) {
@@ -63,17 +63,19 @@ int main(){
         ImGui::Text("encrypt");
     }
     if(ImGui::Button("do")){
-        if(modec){       
-            auto tmp_d = file_read(file_name);
-            auto tmp_dec = AES128_DEC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
-            file_write(file_name, tmp_dec);
+        if(strlen(file_name) > 0 && strlen(key) > 0){
+            if(modec){       
+                auto tmp_d = file_read(file_name);
+                auto tmp_dec = AES128_DEC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
+                file_write(file_name, tmp_dec);
 
-        } else{
-            auto tmp_d = file_read(file_name);
-            auto tmp_enc = AES128_ENC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
-            file_write(file_name, tmp_enc);
+            } else{
+                auto tmp_d = file_read(file_name);
+                auto tmp_enc = AES128_ENC(reinterpret_cast<char *>(tmp_d.text), key, tmp_d.size);
+                file_write(file_name, tmp_enc);
 
-        }
+            }
+        } 
     }
     ImGui::End();   
 
