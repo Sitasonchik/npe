@@ -3,7 +3,7 @@
 
 ## About NPE
 This prog made for file encryption such as documents on C++. 
-Cryprography based on openssl. AES was used for encryption.
+Cryprography based on openssl. AES was used for encryption. Interface based on imgui.
 
 ## Dependencies
 This prog required openssl, cmake.

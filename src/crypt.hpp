@@ -38,9 +38,9 @@ data AES128_ENC(char msg_in[], char key[], size_t len){
     
     EVP_EncryptInit_ex2(ctx, EVP_aes_128_cbc(), hkey, iv, nullptr);
     EVP_EncryptUpdate(ctx, msg_out, &outlen, reinterpret_cast<unsigned char *>(msg_in), len);
-    EVP_EncryptFinal_ex(ctx, msg_out, &tmplen);
+    EVP_EncryptFinal_ex(ctx, msg_out + outlen, &tmplen);
     EVP_CIPHER_CTX_free(ctx);
-    data data_enc(outlen, msg_out);
+    data data_enc(tmplen + outlen, msg_out);
     return data_enc;
 }
 
@@ -56,8 +56,8 @@ data AES128_DEC(char msg_in[], char key[], size_t len){
     
     EVP_DecryptInit_ex2(ctx, EVP_aes_128_cbc(), hkey, iv, nullptr);
     EVP_DecryptUpdate(ctx, msg_out, &outlen, reinterpret_cast<unsigned char *>(msg_in),len);
-    EVP_DecryptFinal_ex(ctx, msg_out, &tmplen);
+    EVP_DecryptFinal_ex(ctx, msg_out + outlen, &tmplen);
     EVP_CIPHER_CTX_free(ctx);
-    data data_enc(outlen, msg_out);
+    data data_enc(tmplen + outlen, msg_out);
     return data_enc;
 }
