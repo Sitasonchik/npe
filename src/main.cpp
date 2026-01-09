@@ -8,6 +8,7 @@
 
 const size_t width = 300;
 const size_t height = 300;
+const size_t buff_size = 1024;
 
 int main(){
     glfwInit();
@@ -28,10 +29,10 @@ int main(){
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
     int fb_width, fb_height;
-    bool modec = 0;
+    bool modec = false;
 
-    auto key = new char[1024]();
-    auto file_name = new char[256]();
+    auto key = new char[buff_size]();
+    auto file_name = new char[buff_size]();
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -42,17 +43,16 @@ int main(){
         glfwGetFramebufferSize(window, &fb_width, &fb_height);
 
         ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImVec2((float)fb_width, (float)fb_height));
+        ImGui::SetNextWindowSize(ImVec2(fb_width, fb_height));
         ImGui::Begin("main", nullptr,
         ImGuiWindowFlags_NoTitleBar |
             ImGuiWindowFlags_NoScrollbar 
         );
 
-
     ImGui::Text("file name:");
-    ImGui::InputText("file name", file_name, 256);
+    ImGui::InputText("file name", file_name, buff_size);
     ImGui::Text("key:");
-    ImGui::InputText("key", key, 1024);
+    ImGui::InputText("key", key, buff_size);
     if (ImGui::Button("choose mode")) {
         modec = !modec;
     }
