@@ -9,16 +9,16 @@ find_package(glfw3 REQUIRED)
 
 
 add_library(imgui
-    imgui/imgui.cpp
-    imgui/imgui_demo.cpp
-    imgui/imgui_draw.cpp
-    imgui/imgui_tables.cpp
-    imgui/imgui_widgets.cpp
-    imgui/backends/imgui_impl_glfw.cpp
-    imgui/backends/imgui_impl_opengl3.cpp
+    imgui_lib/imgui.cpp
+    imgui_lib/imgui_demo.cpp
+    imgui_lib/imgui_draw.cpp
+    imgui_lib/imgui_tables.cpp
+    imgui_lib/imgui_widgets.cpp
+    imgui_lib/backends/imgui_impl_glfw.cpp
+    imgui_lib/backends/imgui_impl_opengl3.cpp
 )
 
-target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/imgui/)
+target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/imgui_lib/)
 
 target_link_libraries(imgui PRIVATE OpenGL::GL glfw)
 
