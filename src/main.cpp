@@ -28,6 +28,7 @@ int main(){
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
+    
     int fb_width, fb_height;
     bool modec = false;
 
